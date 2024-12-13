@@ -1,0 +1,288 @@
+{
+  "version": "0.1.0",
+  "name": "lp_lock",
+  "instructions": [
+    {
+      "name": "initialize",
+      "accounts": [
+        {
+          "name": "lpMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "from",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "tariffData",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "lpLock",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "deposit",
+      "accounts": [
+        {
+          "name": "lpMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "from",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "to",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "fromAta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tariffData",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "lpLock",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "lockAta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "lpUser",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "duration",
+          "type": "u8"
+        },
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "cashout",
+      "accounts": [
+        {
+          "name": "lpMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "to",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "toAta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "lpLock",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "lockAta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "porkUser",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "associatedTokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "stakeBump",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "addOrUpdateTariff",
+      "accounts": [
+        {
+          "name": "from",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "tariffData",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "duration",
+          "type": "u16"
+        },
+        {
+          "name": "amount",
+          "type": "u8"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Lock",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "totalAmount",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Tariff",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "tariffDuration",
+            "type": {
+              "array": [
+                "u16",
+                10
+              ]
+            }
+          },
+          {
+            "name": "tariffAmount",
+            "type": {
+              "array": [
+                "u8",
+                10
+              ]
+            }
+          },
+          {
+            "name": "tariffCount",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "User",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "lockedAmount",
+            "type": "u64"
+          },
+          {
+            "name": "startTimestamp",
+            "type": "i64"
+          },
+          {
+            "name": "endTimestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "StakeBumpError"
+    },
+    {
+      "code": 6001,
+      "name": "MinimumDepositError"
+    },
+    {
+      "code": 6002,
+      "name": "MintError"
+    },
+    {
+      "code": 6003,
+      "name": "CashOutError"
+    },
+    {
+      "code": 6004,
+      "name": "TimeError"
+    },
+    {
+      "code": 6005,
+      "name": "AdminError"
+    }
+  ]
+}
